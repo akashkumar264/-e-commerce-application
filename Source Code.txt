@@ -1,0 +1,64 @@
+// Function to fetch product details based on the provided product ID
+function fetchProductDetails(productId) {
+ return new Promise((resolve, reject) => {
+    // Your HTTP request code to fetch product details goes here
+    // Replace the below example data with your actual data
+    const productDetails = {
+      productId: 1,
+      productName: 'Product A',
+      productBrand: 'Brand A',
+      productCategory: 'Category A',
+      productStock: true,
+    };
+
+    resolve(productDetails);
+ });
+}
+
+// Function to fetch similar products based on the provided product details
+function fetchSimilarProducts(productDetails) {
+ return new Promise((resolve, reject) => {
+    // Your HTTP request code to fetch similar products goes here
+    // Replace the below example data with your actual data
+    const similarProducts = [
+      {
+        productId: 2,
+        productName: 'Product B',
+        productBrand: 'Brand B',
+        productCategory: 'Category A',
+        productStock: true,
+      },
+      {
+        productId: 3,
+        productName: 'Product C',
+        productBrand: 'Brand C',
+        productCategory: 'Category A',
+        productStock: true,
+      },
+    ];
+
+    resolve(similarProducts);
+ });
+}
+
+// Function to fetch product details and similar products based on the provided product ID
+async function getProductDetailsAndSimilarProducts(productId) {
+ try {
+    const productDetails = await fetchProductDetails(productId);
+
+    if (productDetails.productStock) {
+      const similarProducts = await fetchSimilarProducts(productDetails);
+      return { productDetails, similarProducts };
+    } else {
+      throw new Error('Product is not available in stock');
+    }
+ } catch (error) {
+    console.error(error);
+ }
+}
+
+// Call the function to get product details and similar products
+getProductDetailsAndSimilarProducts(1).then((data) => {
+ console.log('Product Details:', data.productDetails);
+ console.log('Similar Products:', data.similarProducts);
+});
